@@ -5,11 +5,7 @@ on:
 
   push:
     branches: [ "*" ]
-    paths-ignore:
-      - COPYING
-      - README.md
-      - LICENSE
-      - '.github/workflows/**'
+
 
 jobs:
   build:
