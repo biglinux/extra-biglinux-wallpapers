@@ -15,13 +15,13 @@ jobs:
       
       - name: Convert to AVIF
         shell: bash
-         run: |
-            cd orginal
-            for i in *.png; do 
-                if [ ! -e "../usr/share/wallpapers/${i%.png}.avif" ]; then 
-                    avifenc --min 0 --max 15 -y 420 -a end-usage=q -a sharpness=0 -a aq-mode=2 -s 2 -j all -d 8 -a film-grain-test=0 "$i" "../usr/share/wallpapers/${i%.png}.avif"
-                fi
-            done
+        run: |
+          cd orginal
+          for i in *.png; do 
+              if [ ! -e "../usr/share/wallpapers/${i%.png}.avif" ]; then 
+                  avifenc --min 0 --max 15 -y 420 -a end-usage=q -a sharpness=0 -a aq-mode=2 -s 2 -j all -d 8 -a film-grain-test=0 "$i" "../usr/share/wallpapers/${i%.png}.avif"
+              fi
+          done
             
       - name: Update github
         run: |
