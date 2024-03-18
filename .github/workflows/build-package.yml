@@ -12,6 +12,29 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      
+      - name: Convert to AVIF
+        shell: |
+            cd orginal
+            for i in *.png; do 
+                if [ ! -e "../usr/share/wallpapers/${i%.png}.avif" ]; then 
+                    avifenc --min 0 --max 15 -y 420 -a end-usage=q -a sharpness=0 -a aq-mode=2 -s 2 -j all -d 8 -a film-grain-test=0 "$i" "../usr/share/wallpapers/${i%.png}.avif"
+                fi
+            done
+            
+      - name: Update github
+        run: |
+          git add --all
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          if [ -n "$(git commit -m "update $(date +%y-%m-%d_%H:%M)" -a | grep "nothing to commit")" ];then exit 0; fi
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
+      
       - name: Send Hooks BigLinux Build Package
         shell: bash
         run: |
