@@ -13,14 +13,19 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       
-      # Tmate ##
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
+      - name: Install dependecies
+        shell: bash
+        run: |
+          sudo apt update
+          sudo apt install -y libavif-bin
+      
+      # # Tmate ##
+      # - name: Setup tmate session
+      #   uses: mxschmitt/action-tmate@v3
       
       - name: Convert to AVIF
         shell: bash
         run: |
-          ls -lha
           cd original
           for i in *.png; do 
               if [ ! -e "../usr/share/wallpapers/${i%.png}.avif" ]; then 
