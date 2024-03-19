@@ -24,7 +24,7 @@ jobs:
       #   uses: mxschmitt/action-tmate@v3
       
       - name: Convert to AVIF
-        shell: bash
+        shell: bash -O extglob {0}
         run: |
           cd original
           for i in *.png; do 
