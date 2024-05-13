@@ -3,6 +3,7 @@
 pkgname=extra-biglinux-wallpapers
 pkgver=$(date +%y.%m.%d)
 pkgrel=$(date +%H%M)
+depends=('kimageformats')
 arch=('any')
 license=('GPL')
 url="https://github.com/biglinux/extra-biglinux-wallpapers"
